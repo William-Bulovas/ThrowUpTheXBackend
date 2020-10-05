@@ -1,0 +1,20 @@
+export interface HistoricalStanding {
+    manager: string,
+    managerId: string,
+    yearsPlayed: number,
+    totalWins: number,
+    totalLosses: number,
+    winPercentage: number,
+    averageWins: number,
+    averageLosses: number,
+    averageRank: number,
+    totalPointsFor: number,
+    totalPointsAgainst: number,
+    averagePointsFor: number,
+    averagePointsAgainst: number,
+    playoffsMade: number,
+    firstPlaces: number,
+    secondPlaces: number,
+    thirdPlaces: number,
+    rank: number[]
+}
