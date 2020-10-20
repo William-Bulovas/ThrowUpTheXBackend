@@ -7,6 +7,7 @@ import { getHistoricalStandingData } from './dataGatherers/historicalStandingGat
 import { getMatchupOverview } from './dataGatherers/matchupGatherer';
 import { SecretsDao } from './dao/secretsDao';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { getMatchupDetail } from './dataGatherers/matchupDetailGatherer';
 
 enum DataTypes {
     Draft,
@@ -17,7 +18,8 @@ enum DataTypes {
 interface DataGathererInput {
     code: string,
     leagueCode: string,
-    data: string
+    data: string,
+    week: string
 }
 
 export const handler = async (input: DataGathererInput) => {
@@ -43,5 +45,7 @@ export const handler = async (input: DataGathererInput) => {
         case 'MatchupOverview':
             await getMatchupOverview(input.leagueCode, yf);
             return;
+        case 'MatchupData':
+            await getMatchupDetail(input.leagueCode, yf, input.week);
     }
 }

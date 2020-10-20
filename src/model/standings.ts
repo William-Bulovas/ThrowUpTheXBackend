@@ -1,12 +1,12 @@
 export interface Standing {
-    manager: string,
     managerId: string,
-    year: number,
-    teamName: string,
+    manager: string,
     teamId: string,
+    teamName: string,
     rank: number,
     wins: number,
     losses: number,
     pointsFor: number,
-    pointsAgainst: number
+    pointsAgainst: number,
+    year: number
 }

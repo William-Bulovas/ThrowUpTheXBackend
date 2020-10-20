@@ -1,13 +1,13 @@
 interface DraftResult {
-  year: number,
-  teamName: string,
+  managerId: string,
   manager: string,
+  teamId: string,
+  teamName: string,
+  playerId: string,
   playerName: string,
+  playerPosition: string,
+  pointsScored: number,
   pick: number,
   round: number,
-  pointsScored: number,
-  teamId: string,
-  playerId: string,
-  managerId: string,
-  playerPosition: string
+  year: number
 }

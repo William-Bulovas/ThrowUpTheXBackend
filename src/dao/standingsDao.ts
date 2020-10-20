@@ -64,7 +64,7 @@ export class StandingsDao {
                 pk: standing.managerId,
                 sk: this.STANDING_PREFIX + '#' + this.HISTORICAL_PREFIX, 
                 gsiIndex: this.STANDING_PREFIX + '#' + this.HISTORICAL_PREFIX,
-                gsiSort: this.STANDING_PREFIX + '#' + standing.managerId,
+                gsiSort: this.STANDING_PREFIX + '#' + this.createAverageRankString(standing.averageRank) + '#' + standing.managerId,
                 ...standing
             }
          }).promise()
@@ -85,5 +85,10 @@ export class StandingsDao {
 
     private createRankString(pick: number): string {
         return (new Array(2).join('0') + pick).slice(-2);
+    }
+
+    private createAverageRankString(averageWin: number): string {
+        averageWin = Math.round((averageWin * 100));
+        return (new Array(4).join('0') + averageWin).slice( - 4);
     }
 }

@@ -1,6 +1,9 @@
 import { Cors, LambdaRestApi } from '@aws-cdk/aws-apigateway';
+import { CloudFrontWebDistribution, Distribution } from '@aws-cdk/aws-cloudfront';
 import { AttributeType, BillingMode, Table } from '@aws-cdk/aws-dynamodb';
 import { AssetCode, Function, Runtime } from '@aws-cdk/aws-lambda';
+import { Bucket } from '@aws-cdk/aws-s3';
+import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import { Duration } from '@aws-cdk/core';
 
@@ -50,6 +53,35 @@ export class ThrowUpTheXBackendStack extends cdk.Stack {
       defaultCorsPreflightOptions: {
         allowOrigins: Cors.ALL_METHODS
       }
+    });
+
+    const frontEndBucket = new Bucket(this, 'ThrowUpTheXWebsiteBucket', {
+      websiteIndexDocument: 'index.html',
+      publicReadAccess: true
+    });    
+
+    const distribution = new CloudFrontWebDistribution(this, 'distribution', {
+      originConfigs: [
+        {
+            s3OriginSource: {
+                s3BucketSource: frontEndBucket
+            },
+            behaviors : [ {isDefaultBehavior: true}],
+        }
+      ],
+      errorConfigurations: [
+        {
+          errorCode: 403,
+          responseCode: 200,
+          responsePagePath: '/index.html'
+        }
+      ]
+    });
+
+    new BucketDeployment(this, 'deployment', {
+      sources: [ Source.asset('../throw-up-the-x-frontend/build') ],
+      destinationBucket: frontEndBucket,
+      distribution
     });
   }
 }

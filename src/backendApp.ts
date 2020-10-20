@@ -6,11 +6,12 @@ import awsServerlessExpressMiddleware = require('aws-serverless-express/middlewa
 import { DraftResultDao } from './dao/draftResultDao';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { StandingsDao } from './dao/standingsDao';
+import { MatchupDao } from './dao/matchupDao';
 
 const app = express();
 const router = express.Router();
 
-router.use(compression());
+router.use(compression({threshold:0}));
 router.use(cors());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +21,7 @@ const documentClient = new DocumentClient;
 
 const draftResultsDao = new DraftResultDao(documentClient);
 const standingDao = new StandingsDao(documentClient);
+const matchupDao = new MatchupDao(documentClient);
 
 app.use('/', router);
 
@@ -41,6 +43,18 @@ app.get('/standing/:year', async (req, res) => {
 
 app.get('/historicalStanding', async (req, res) => {
     res.json(await standingDao.getHistoricalStandings());
+});
+
+app.get('/matchup/:managerIdA/:managerIdB', async (req, res) => {
+    res.json(await matchupDao.getMatchupData(req.params.managerIdA, req.params.managerIdB));
+});
+
+app.get('/matchupDetail/:managerIdA/:managerIdB/:year/:week', async (req, res) => {
+    res.json(await matchupDao.getMatchupDetail(
+        req.params.managerIdA, 
+        req.params.managerIdB, 
+        parseInt(req.params.week),
+        req.params.year))
 });
 
 export default app;
