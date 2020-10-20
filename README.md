@@ -1,14 +1,11 @@
-# Welcome to your CDK TypeScript project!
+# Throw up the X Backend 
 
-This is a blank project for TypeScript development with CDK.
+This project contains the CDK + backend code for the Throw up the X Fantasy Football Viewer
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## About
 
-## Useful commands
+This project uses AWS API Gateway + AWS Lambda for the backend infrastruture.
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+The data is stored in dynamo and is retrieved by calling the Yahoo APIs
+
+The CDK contains the infrastructure for the Frontend Website which is a static website hosted on an S3 bucket with AWS Cloudfront
