@@ -38,7 +38,7 @@ export class DraftResultDao {
         return results.Items as DraftResult[];
     }
     
-    async getDraftResultForPlayerAndYear(player: string, year: string): Promise<DraftResult[]> {
+    async getDraftResultForPlayerAndYear(player: string, year = ''): Promise<DraftResult[]> {
         const results = await this.documentClient.query({
             TableName: this.TABLE_NAME,
             KeyConditionExpression: 'pk = :player and begins_with(sk, :prefix)',

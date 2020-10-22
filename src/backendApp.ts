@@ -37,6 +37,10 @@ app.get('/draft/:year/:manager?', async (req, res) => {
     res.json(await draftResultsDao.getDraftResultForYear(req.params.year));
 });
 
+app.get('/draftForManager/:manager', async (req, res) => {
+    res.json(await draftResultsDao.getDraftResultForPlayerAndYear(req.params.manager));
+});
+
 app.get('/standing/:year', async (req, res) => {
     res.json(await standingDao.getStandingsForYear(req.params.year));
 });
