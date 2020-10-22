@@ -41,14 +41,13 @@ export class StandingsDao {
         return results.Items as Standing[];
     }
     
-    // TODO Split out historical standing from season results
     async getStandingsForManager(player: string): Promise<Standing[]> {
         const results = await this.documentClient.query({
             TableName: this.TABLE_NAME,
             KeyConditionExpression: 'pk = :player and begins_with(sk, :prefix)',
             ExpressionAttributeValues: {
                 ':player' : player,
-                ':prefix': this.STANDING_PREFIX
+                ':prefix': this.STANDING_PREFIX + '#2'
             }
         }).promise();
         

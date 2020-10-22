@@ -41,6 +41,10 @@ app.get('/standing/:year', async (req, res) => {
     res.json(await standingDao.getStandingsForYear(req.params.year));
 });
 
+app.get('/standingForManager/:manager', async (req, res) => {
+    res.json(await standingDao.getStandingsForManager(req.params.manager));
+});
+
 app.get('/historicalStanding', async (req, res) => {
     res.json(await standingDao.getHistoricalStandings());
 });
