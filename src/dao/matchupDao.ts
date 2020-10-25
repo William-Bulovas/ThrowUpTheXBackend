@@ -60,7 +60,7 @@ export class MatchupDao {
        }).promise();
     }
     
-    async getMatchupData(managerIdA: string, managerIdB: string): Promise<MatchupOverview[]> {
+    async getMatchupData(managerIdA: string, managerIdB = ''): Promise<MatchupOverview[]> {
         console.log('ManagerIdA ' + managerIdA)
         console.log('ManagerIdB ' + managerIdB)
 

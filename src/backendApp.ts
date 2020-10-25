@@ -53,7 +53,7 @@ app.get('/historicalStanding', async (req, res) => {
     res.json(await standingDao.getHistoricalStandings());
 });
 
-app.get('/matchup/:managerIdA/:managerIdB', async (req, res) => {
+app.get('/matchup/:managerIdA/:managerIdB?', async (req, res) => {
     res.json(await matchupDao.getMatchupData(req.params.managerIdA, req.params.managerIdB));
 });
 
