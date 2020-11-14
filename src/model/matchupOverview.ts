@@ -1,4 +1,9 @@
 export interface MatchupOverview {
+    pk?: string,
+    sk?: string,
+    gsiIndex?: string,
+    gsiSort?: string,
+
     winnterTeamId: string,
     winnerName: string,
     year: string,

@@ -14,7 +14,7 @@ export class SecretsDao {
             TableName: this.TABLE_NAME,
             KeyConditionExpression: 'pk = :p',
             ExpressionAttributeValues: {
-                ':year' : this.S
+                ':p' : this.S
             }
         }).promise();
         

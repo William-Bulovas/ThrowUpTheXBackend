@@ -7,6 +7,7 @@ import { DraftResultDao } from './dao/draftResultDao';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { StandingsDao } from './dao/standingsDao';
 import { MatchupDao } from './dao/matchupDao';
+import { MatchupRecordType } from './model/matchupRecord';
 
 const app = express();
 const router = express.Router();
@@ -64,5 +65,14 @@ app.get('/matchupDetail/:managerIdA/:managerIdB/:year/:week', async (req, res) =
         parseInt(req.params.week),
         req.params.year))
 });
+
+app.get('/matchupRecord/:highest', async (req, res) => {
+    res.json(await matchupDao.getMatchupRecords(req.params.highest as MatchupRecordType));
+});
+
+app.get('/matchupRecordDifferential/:highest', async (req, res) => {
+    res.json(await matchupDao.getMatchupDifferentialRecords(req.params.highest as MatchupRecordType));
+});
+
 
 export default app;

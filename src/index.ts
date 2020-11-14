@@ -8,6 +8,8 @@ import { getMatchupOverview } from './dataGatherers/matchupGatherer';
 import { SecretsDao } from './dao/secretsDao';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { getMatchupDetail } from './dataGatherers/matchupDetailGatherer';
+import { getMatchupRecords } from './dataGatherers/matchupRecordGatherer';
+
 
 enum DataTypes {
     Draft,
@@ -47,5 +49,7 @@ export const handler = async (input: DataGathererInput) => {
             return;
         case 'MatchupData':
             await getMatchupDetail(input.leagueCode, yf, input.week);
+        case 'MatchupRecords':
+            await getMatchupRecords();
     }
 }
