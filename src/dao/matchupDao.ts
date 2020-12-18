@@ -206,7 +206,7 @@ export class MatchupDao {
                 ':pkprefix': this.MATCHUP_RECORD_PREFIX,
                 ':prefix': this.MATCHUP_RECORD_PREFIX
             },
-            Limit: 10,
+            Limit: 20,
             ScanIndexForward: ascending
         }).promise();
         
@@ -223,7 +223,7 @@ export class MatchupDao {
                 ':pkprefix': this.MATCHUP_RECORD_DIFFERENCE_PREFIX,
                 ':prefix': this.MATCHUP_RECORD_DIFFERENCE_PREFIX
             },
-            Limit: 10,
+            Limit: 20,
             ScanIndexForward: ascending
         }).promise();
         
