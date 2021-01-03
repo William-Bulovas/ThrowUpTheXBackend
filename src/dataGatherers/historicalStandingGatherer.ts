@@ -52,7 +52,7 @@ export const getHistoricalStandingData = async (yf: YahooFantasy) => {
                     totalPointsAgainst: value.totalPointsAgainst + Number(standing.standings.points_against),
                     totalPointsFor: value.totalPointsFor + Number(standing.standings.points_for),
                     rank: [...value.rank, Number(standing.standings.rank)],
-                    playoffsMade: value.playoffsMade + Number(standing.standings.rank) < 5 ? 1 : 0,
+                    playoffsMade: value.playoffsMade + standing.clinched_playoffs,
                     firstPlaces: value.firstPlaces + (Number(standing.standings.rank) == 1 ? 1 : 0),
                     secondPlaces: value.secondPlaces + (Number(standing.standings.rank) == 2 ? 1 : 0),
                     thirdPlaces: value.thirdPlaces + (Number(standing.standings.rank) == 3 ? 1 : 0)    
