@@ -36,7 +36,7 @@ export const handler = async (input: DataGathererInput) => {
 
     switch (input.data) {
         case 'Draft':
-            await getDraftData(yf);
+            await getDraftData(yf, input.leagueCode);
             return;
         case 'Standings':
             await getStandingData(yf);
@@ -49,7 +49,9 @@ export const handler = async (input: DataGathererInput) => {
             return;
         case 'MatchupData':
             await getMatchupDetail(input.leagueCode, yf, input.week);
+            return;
         case 'MatchupRecords':
             await getMatchupRecords();
+            return;
     }
 }

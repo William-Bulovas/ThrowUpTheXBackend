@@ -3,10 +3,10 @@ import YahooFantasy = require('yahoo-fantasy');
 import { DraftResultDao } from '../dao/draftResultDao';
 import { leagueKeys } from '../model/leagueKeys';
 
-export const getDraftData = async(yf: YahooFantasy) => {
+export const getDraftData = async(yf: YahooFantasy, key: string) => {
     const draftResultDao = new DraftResultDao(new DocumentClient);
 
-    await Promise.all(leagueKeys.map(async leagueKey => getDataForLeagueKey(yf, draftResultDao, leagueKey)));
+    await getDataForLeagueKey(yf, draftResultDao, key);
 }
 
 const getDataForLeagueKey = async (yf: YahooFantasy, dao: DraftResultDao, leagueKey: string) => {
